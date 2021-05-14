@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  jersey:
+    build:
+      context: .
+    ports:
+      - '8080:8080'
+    volumes:
+    - .:/app
+    environment:
+      - MYSQL_PASSWORD=jersey
+      - LOG_LEVEL=DEBUG
+    command: ./mvnw exec:java
+
+  mysqlserver:
+    build:
+      context: ./mysql
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_USER=jersey
+      - MYSQL_PASSWORD=jersey
+      - MYSQL_DATABASE=jersey
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+volumes:
+  mysql_data:
+  mysql_config:

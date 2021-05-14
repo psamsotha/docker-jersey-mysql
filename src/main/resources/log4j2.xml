@@ -13,7 +13,7 @@
         </File>
     </Appenders>
     <Loggers>
-        <Root level="DEBUG">
+        <Root level="${env:LOG_LEVEL:-INFO}">
             <AppenderRef ref="Console" />
             <AppenderRef ref="File" />
         </Root>
