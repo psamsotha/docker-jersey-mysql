@@ -7,6 +7,6 @@ COPY mvnw pom.xml ./
 RUN ./mvnw dependency:go-offline
 
 COPY src ./src
-RUN ./mvnw package
+RUN ./mvnw clean package
 
 CMD ["./mvnw", "exec:java"]
